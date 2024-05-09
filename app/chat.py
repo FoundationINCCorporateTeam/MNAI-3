@@ -36,7 +36,6 @@ def get_response():
         response_data = {"error": "I'm sorry, I couldn't find relevant information for your query."}
     
     return add_cors_headers(jsonify(response_data))
-
 # Function to extract important phrases from user input using GPT-2
 def extract_phrases(user_input):
     # Tokenize the input text
