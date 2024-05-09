@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
@@ -14,6 +14,10 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/get-response', methods=['POST'])
 def get_response():
@@ -36,6 +40,7 @@ def get_response():
         response_data = {"error": "I'm sorry, I couldn't find relevant information for your query."}
     
     return add_cors_headers(jsonify(response_data))
+
 # Function to extract important phrases from user input using GPT-2
 def extract_phrases(user_input):
     # Tokenize the input text
