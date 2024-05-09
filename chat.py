@@ -16,9 +16,9 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
 
-@app.route('/get-response')
+@app.route('/get-response', methods=['POST'])
 def get_response():
-    user_input = request.args.get('user_input', '')
+    user_input = request.form.get('question', '')
     if not user_input:
         return json.dumps({"error": "No user input provided."}), 400
     
