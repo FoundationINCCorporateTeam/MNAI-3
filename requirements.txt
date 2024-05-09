@@ -2,4 +2,5 @@ Flask==2.0.2
 requests==2.26.0
 beautifulsoup4==4.10.0
 transformers==4.14.0
-tokenizers==0.10.3  # Example version, adjust as needed
+# Direct link to the pre-built tokenizers wheel
+https://github.com/huggingface/tokenizers/releases/download/v0.10.3/tokenizers-0.10.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl
