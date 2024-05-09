@@ -1,4 +1,4 @@
-from flask import Flask, send_file, request, jsonify
+from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
@@ -14,10 +14,6 @@ def add_cors_headers(response):
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
-
-@app.route('/')
-def index():
-    return send_file('static/botty.html')
 
 @app.route('/get-response', methods=['POST'])
 def get_response():
