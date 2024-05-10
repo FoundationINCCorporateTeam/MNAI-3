@@ -1,29 +1,21 @@
 import os
 import subprocess
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 import torch
+
+app = Flask(__name__)
+
 # Load pre-trained GPT-2 model and tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
 
-app = Flask(__name__)
-
-# Enable CORS for all routes
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    return response
-
-@app.route('/')
-def home():
-    return render_template('botty.html')
-
 @app.route('/api/get-response', methods=['POST'])
 def get_response():
-    user_input = request.form.get('question', '')
+    user_input = request.json.get('question', '')  # Assuming the data is sent as JSON
+    
     if not user_input:
         return jsonify({"error": "No user input provided."}), 400
     
@@ -41,7 +33,7 @@ def get_response():
     else:
         response_data = {"error": "I'm sorry, I couldn't find relevant information for your query."}
     
-    return add_cors_headers(jsonify(response_data))
+    return response_data
 
 # Function to extract important phrases from user input using GPT-2
 def extract_phrases(user_input):
@@ -89,10 +81,4 @@ def extract_information(article_url):
     return summary
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000) # Set the port to whatever you need
-    
-    # Install Gunicorn
-    subprocess.run(["pip", "install", "gunicorn"])
-    
-    # Run the Flask app using Gunicorn with the specified host and port
-    subprocess.run(["gunicorn", "app:app", "--bind", "0.0.0.0:{}".format(port)])
+    app.run(host='0.0.0.0', port=10000)  # Set the port to whatever you need
