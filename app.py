@@ -21,7 +21,7 @@ def add_cors_headers(response):
 def home():
     return render_template('botty.html')
 
-@app.route('/get-response', methods=['POST'])
+@app.route('/api/get-response', methods=['POST'])
 def get_response():
     user_input = request.form.get('question', '')
     if not user_input:
