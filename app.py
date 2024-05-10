@@ -92,4 +92,4 @@ if __name__ == '__main__':
     subprocess.run(["pip", "install", "gunicorn"])
     
     # Run the Flask app using Gunicorn
-    app.run(debug=True)
+    subprocess.run(["gunicorn", "app:app"])
