@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import requests
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 import subprocess
+import torch
+
 
 # Load pre-trained GPT-2 model and tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
