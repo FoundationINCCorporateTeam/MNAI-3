@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
+import subprocess
 
 # Load pre-trained GPT-2 model and tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
@@ -17,7 +18,7 @@ def add_cors_headers(response):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('botty.html')
 
 @app.route('/get-response', methods=['POST'])
 def get_response():
@@ -87,4 +88,8 @@ def extract_information(article_url):
     return summary
 
 if __name__ == '__main__':
+    # Install Gunicorn
+    subprocess.run(["pip", "install", "gunicorn"])
+    
+    # Run the Flask app using Gunicorn
     app.run(debug=True)
