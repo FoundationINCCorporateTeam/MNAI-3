@@ -5,7 +5,6 @@ from transformers import GPT2Tokenizer, GPT2LMHeadModel
 import subprocess
 import torch
 
-
 # Load pre-trained GPT-2 model and tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
@@ -93,5 +92,5 @@ if __name__ == '__main__':
     # Install Gunicorn
     subprocess.run(["pip", "install", "gunicorn"])
     
-    # Run the Flask app using Gunicorn
-    subprocess.run(["gunicorn", "app:app"])
+    # Run the Flask app using Gunicorn with port 5000
+    subprocess.run(["gunicorn", "app:app", "--bind", "0.0.0.0:5000"])
