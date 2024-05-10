@@ -27,9 +27,9 @@ async function fetchResponse(question) {
 function handleFormSubmit(event) {
     event.preventDefault(); // Prevent the default form submission behavior
     
-    // Get the value of the question textarea
-    const questionTextarea = document.getElementById('question');
-    const question = questionTextarea.value.trim();
+    // Get the value of the question input
+    const questionInput = document.getElementById('question');
+    const question = questionInput.value.trim();
     
     // Call fetchResponse function with the question
     fetchResponse(question);
