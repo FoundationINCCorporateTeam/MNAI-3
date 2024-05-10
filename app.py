@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import requests
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 import torch
-
+    port = int(os.environ.get('PORT', 4000))
 # Load pre-trained GPT-2 model and tokenizer
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
@@ -90,8 +90,6 @@ def extract_information(article_url):
     return summary
 
 if __name__ == '__main__':
-    # Determine the port to bind to, defaulting to 8080
-    port = int(os.environ.get('PORT', 8080))
     
     # Install Gunicorn
     subprocess.run(["pip", "install", "gunicorn"])
