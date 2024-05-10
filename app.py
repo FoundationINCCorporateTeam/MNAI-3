@@ -90,11 +90,11 @@ def extract_information(article_url):
     return summary
 
 if __name__ == '__main__':
-    # Determine the port to bind to, defaulting to 5000
-    port = int(os.environ.get('PORT', 5000))
+    # Determine the port to bind to, defaulting to 8080
+    port = int(os.environ.get('PORT', 8080))
     
     # Install Gunicorn
     subprocess.run(["pip", "install", "gunicorn"])
     
-    # Run the Flask app using Gunicorn with the specified port
-    subprocess.run(["gunicorn", "app:app", "--bind", f"0.0.0.0:{port}"])
+    # Run the Flask app using Gunicorn with the specified host and port
+    subprocess.run(["gunicorn", "app:app", "--bind", "0.0.0.0:{}".format(port)])
