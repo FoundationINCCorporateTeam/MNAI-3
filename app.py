@@ -90,6 +90,7 @@ def extract_information(article_url):
     return summary
 
 if __name__ == '__main__':
+    app.run(port=4000)  # Set the port to whatever you need
     
     # Install Gunicorn
     subprocess.run(["pip", "install", "gunicorn"])
