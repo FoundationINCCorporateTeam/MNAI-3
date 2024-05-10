@@ -1,8 +1,9 @@
+import os
+import subprocess
 from flask import Flask, render_template, request, jsonify
 from bs4 import BeautifulSoup
 import requests
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
-import subprocess
 import torch
 
 # Load pre-trained GPT-2 model and tokenizer
@@ -89,8 +90,11 @@ def extract_information(article_url):
     return summary
 
 if __name__ == '__main__':
+    # Determine the port to bind to, defaulting to 5000
+    port = int(os.environ.get('PORT', 5000))
+    
     # Install Gunicorn
     subprocess.run(["pip", "install", "gunicorn"])
     
-    # Run the Flask app using Gunicorn with port 5000
-    subprocess.run(["gunicorn", "app:app", "--bind", "0.0.0.0:5000"])
+    # Run the Flask app using Gunicorn with the specified port
+    subprocess.run(["gunicorn", "app:app", "--bind", f"0.0.0.0:{port}"])
